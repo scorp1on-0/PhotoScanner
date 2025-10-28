@@ -1,31 +1,37 @@
 import os
 import shutil
-import face_recognition
+import face_recognition as fr
 
+# Variables you can change
+dir = "photos"
+self_image = "self.jpeg"
+# ========================
 
 j = 0
-errors = []
-dir = "self_photos"
-photolen = len(os.listdir(dir))
+photolen = len(os.listdir(dir))  # Number of photos in target folder
 tag = photolen / 100
+errors = []
+
 print(f"Loaded {photolen} photos. Scanning for matches...")
 print("<", end="")
 for i in range(100):
     print("-", end="")
 i = 0
 print(">")
+
 found = 0
+
 print("[", end="")
 for photo in os.listdir(dir):
     if not str(photo).__contains__("("):
-        known_image = face_recognition.load_image_file("unknown.jpeg")
+        known_image = fr.load_image_file(self_image)
 
-        unknown_image = face_recognition.load_image_file(f"{dir}/{photo}")
+        unknown_image = fr.load_image_file(f"{dir}/{photo}")
 
-        self_encoding = face_recognition.face_encodings(known_image)[0]
+        self_encoding = fr.face_encodings(known_image)[0]
         try:
-            unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
-            results = face_recognition.compare_faces([self_encoding], unknown_encoding)
+            unknown_encoding = fr.face_encodings(unknown_image)[0]
+            results = fr.compare_faces([self_encoding], unknown_encoding)
             if str(results).__contains__("True"):
                 shutil.move(f"{dir}/{photo}", f"self_photos/{photo}")
                 found += 1

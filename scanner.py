@@ -18,7 +18,7 @@ found = 0
 def compare_photos(photo):
     if not str(photo).__contains__("("):  # Avoid duplicates (e.g. img(1).jpg)
 
-        known_image = fr.load_image_file("self.jpeg")
+        known_image = fr.load_image_file(self_image)
 
         unknown_image = fr.load_image_file(f"{dir}/{photo}")
 

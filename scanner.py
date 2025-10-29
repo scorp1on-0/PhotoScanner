@@ -12,7 +12,7 @@ photolen = len(os.listdir(dir))  # Number of photos in target folder
 tag = photolen / 100
 errors = []
 
-print(f"Loaded {photolen} photos. Estimated {photolen*6/60} minutes. Scanning for matches...")
+print(f"Loaded {photolen} photos. Estimated {photolen*5.62/60} minutes. Scanning for matches...")
 print("<", end="")
 for i in range(100):
     print("-", end="")
